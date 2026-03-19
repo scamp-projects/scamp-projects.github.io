@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zendesk Competitive Battlecards</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #03363D;
+            background: #F8F9FA;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #03363D 0%, #045C6B 100%);
+            color: white;
+            padding: 40px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+
+        h1 {
+            font-family: 'Inter', sans-serif;
+            font-weight: 600;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .tabs-container {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .tabs {
+            display: flex;
+            background: #03363D;
+            overflow-x: auto;
+            border-bottom: 2px solid #30A46C;
+        }
+
+        .tab {
+            flex: 1;
+            min-width: 150px;
+            padding: 18px 20px;
+            background: #03363D;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border-right: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .tab:hover {
+            background: #045C6B;
+        }
+
+        .tab.active {
+            background: white;
+            color: #03363D;
+            border-bottom: 3px solid #30A46C;
+        }
+
+        .tab-content {
+            display: none;
+            padding: 40px;
+            max-height: 800px;
+            overflow-y: auto;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .section {
+            margin-bottom: 35px;
+        }
+
+        .section h2 {
+            color: #03363D;
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            border-bottom: 3px solid #30A46C;
+            padding-bottom: 8px;
+        }
+
+        .section h3 {
+            color: #045C6B;
+            font-size: 1.3em;
+            margin-bottom: 12px;
+            margin-top: 20px;
+        }
+
+        .overview-box {
+            background: #E6F7F0;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #30A46C;
+            margin-bottom: 20px;
+        }
+
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 15px;
+        }
+
+        .comparison-card {
+            background: #F8F9FA;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 4px solid #30A46C;
+        }
+
+        .comparison-card.competitor {
+            border-left-color: #DC3545;
+        }
+
+        .comparison-card h4 {
+            color: #03363D;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            padding: 8px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .feature-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #30A46C;
+            font-weight: bold;
+        }
+
+        .feature-list li.negative::before {
+            content: "✗";
+            color: #DC3545;
+        }
+
+        .win-section {
+            background: linear-gradient(135deg, #30A46C 0%, #2D9E63 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .win-section h3 {
+            color: white;
+            margin-top: 0;
+        }
+
+        .objection-box {
+            background: #FFF3CD;
+            border-left: 4px solid #FFC107;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+
+        .objection-box strong {
+            display: block;
+            color: #856404;
+            margin-bottom: 8px;
+            font-size: 1.05em;
+        }
+
+        .response {
+            color: #03363D;
+            margin-top: 8px;
+            padding-left: 15px;
+            border-left: 3px solid #30A46C;
+        }
+
+        .price-tag {
+            display: inline-block;
+            background: #03363D;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            margin: 5px 5px 5px 0;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.85em;
+            font-weight: 600;
+            margin-right: 8px;
+        }
+
+        .badge.strength {
+            background: #D4EDDA;
+            color: #155724;
+        }
+
+        .badge.weakness {
+            background: #F8D7DA;
+            color: #721C24;
+        }
+
+        .use-case {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border: 2px solid #E9ECEF;
+        }
+
+        .use-case h4 {
+            color: #03363D;
+            margin-bottom: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+
+        table th, table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #DEE2E6;
+        }
+
+        table th {
+            background: #03363D;
+            color: white;
+            font-weight: 600;
+        }
+
+        table tr:hover {
+            background: #F8F9FA;
+        }
+
+        @media (max-width: 768px) {
+            .tabs {
+                flex-direction: column;
+            }
+
+            .tab {
+                border-right: none;
+                border-bottom: 1px solid rgba(255,255,255,0.1);
+            }
+
+            .comparison-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tab-content {
+                padding: 20px;
+                max-height: 600px;
+            }
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #F1F1F1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #03363D;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #045C6B;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Zendesk Competitive Battlecards</h1>
+            <p class="subtitle">Sales Intelligence: Positioning Zendesk Against Key Competitors</p>
+        </header>
+
+        <div class="tabs-container">
+            <div class="tabs">
+                <button class="tab active" onclick="openTab(event, 'salesforce')">Salesforce</button>
+                <button class="tab" onclick="openTab(event, 'freshworks')">Freshworks</button>
+                <button class="tab" onclick="openTab(event, 'intercom')">Intercom</button>
+                <button class="tab" onclick="openTab(event, 'decagon')">Decagon</button>
+                <button class="tab" onclick="openTab(event, 'sierra')">Sierra AI</button>
+                <button class="tab" onclick="openTab(event, 'servicenow')">ServiceNow</button>
+            </div>
+
+            <!-- SALESFORCE TAB -->
+            <div id="salesforce" class="tab-content active">
+                <div class="overview-box">
+                    <h2>Salesforce Service Cloud</h2>
+                    <p><strong>Company Profile:</strong> Enterprise CRM leader expanding into service. Strong brand recognition but complex implementation and high total cost of ownership.</p>
+                    <p><strong>Market Position:</strong> Enterprise-focused, CRM-first platform trying to compete in service automation.</p>
+                </div>
+
+                <div class="section">
+                    <h2>Pricing Comparison</h2>
+                    <div class="price-tag">Salesforce: $75-$330/user/month</div>
+                    <div class="price-tag">Zendesk: $19-$115/user/month (Suite)</div>
+                    <p style="margin-top: 15px;"><strong>Key Insight:</strong> Salesforce's pricing is significantly higher and doesn't include many features out of the box. Hidden costs in implementation, customization, and add-ons make TCO 2-3x higher than Zendesk.</p>
+                </div>
+
+                <div class="section">
+                    <h2>Feature & AI Capabilities Comparison</h2>
+                    <div class="comparison-grid">
+                        <div class="comparison-card">
+                            <h4>✓ Zendesk Advantages</h4>
+                            <ul class="feature-list">
+                                <li>Purpose-built for service from day one</li>
+                                <li>Agentic AI with autonomous resolution</li>
+                                <li>Self-improving AI learning loop</li>
+                                <li>Unified platform (customer + employee service)</li>
+                                <li>Fast implementation (weeks vs. months)</li>
+                                <li>Native omnichannel (no bolt-ons)</li>
+                                <li>Intuitive UI, minimal training needed</li>
+                            </ul>
+                        </div>
+                        <div class="comparison-card competitor">
+                            <h4>✗ Salesforce Limitations</h4>
+                            <ul class="feature-list">
+                                <li class="negative">CRM-first, service is secondary</li>
+                                <li class="negative">AI requires Einstein licenses ($$$$)</li>
+                                <li class="negative">Complex customization needed</li>
+                                <li class="negative">Separate products for different channels</li>
+                                <li class="negative">6-12 month implementations common</li>
+                                <li class="negative">Requires dedicated admin team</li>
+                                <li class="negative">High consulting costs</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>Strengths & Weaknesses</h2>
+                    <h3>Salesforce Strengths</h3>
+                    <p><span class="badge strength">Brand Recognition</span> <span class="badge strength">CRM Integration</span> <span class="badge strength">Enterprise Scale</span></p>
+                    <ul class="feature-list">
+                        <li>Strong existing CRM footprint in enterprises</li>
+                        <li>Comprehensive ecosystem (if you're willing to pay)</li>
+                        <li>Sales + Service alignment (theoretically)</li>
+                    </ul>
+
+                    <h3>Salesforce Weaknesses</h3>
+                    <p><span class="badge weakness">Complexity</span> <span class="badge weakness">Cost</span> <span class="badge weakness">Implementation Time</span></p>
+                    <ul class="feature-list">
+                        <li class="negative">Overwhelming complexity for service teams</li>
+                        <li class="negative">Hidden costs and nickel-and-diming</li>
+                        <li class="negative">Requires expensive consultants and admins</li>
+                        <li class="negative">AI capabilities lag behind Zendesk's agentic approach</li>
+                        <li class="negative">Poor user experience for agents</li>
+                    </ul>
+                </div>
+
+                <div class="win-section">
+                    <h2>Why Zendesk Wins</h2>
+                    <h3>For Service Leaders:</h3>
+                    <ul class="feature-list">
+                        <li><strong>Speed to Value:</strong> Deploy in weeks, not months. Your team can start resolving tickets faster without lengthy training.</li>
+                        <li><strong>Purpose-Built for Service:</strong> While Salesforce bolted service onto their CRM, we built the first platform designed for resolution from day one.</li>
+                        <li><strong>Agentic AI Leadership:</strong> Our self-improving AI delivers autonomous resolutions today, not aspirational features in future releases.</li>
+                        <li><strong>Agent Productivity:</strong> Intuitive interface means less training, higher adoption, better metrics.</li>
+                    </ul>
+
+                    <h3>For IT Leaders:</h3>
+                    <ul class="feature-list">
+                        <li><strong>Lower TCO:</strong> 50-70% lower than Salesforce when you factor in licensing, implementation, and ongoing admin costs.</li>
+                        <li><strong>Unified Architecture:</strong> One platform for customer and employee service eliminates tool sprawl.</strong></li>
+                        <li><strong>Governance at Scale:</strong> Enterprise-grade security and compliance without the complexity tax.</li>
+                        <li><strong>API-First Design:</strong> Modern, flexible integrations vs. Salesforce's legacy architecture.</li>
+                    </ul>
+                </div>
+
+                <div class="section">
+                    <h2>Common Objections & Responses</h2>
+
+                    <div class="objection-box">
+                        <strong>Objection: "We already use Salesforce CRM, so Service Cloud makes sense."</strong>
+                        <div class="response">
+                            <p><strong>Response:</strong> That's a common assumption, but here's what we hear from customers who made that choice: the CRM integration isn't as seamless as promised, and the complexity actually creates silos between sales and service. With Zendesk, you get native Salesforce CRM integration without the Service Cloud overhead. Your service team gets a purpose-built tool while maintaining CRM visibility. Best of both worlds.</p>
+                        </div>
+                    </div>
+
+                    <div class="objection-box">
+                        <strong>Objection: "Salesforce is the industry standard."</strong>
+                        <div class="response">
+                            <p><strong>Response:</strong> Salesforce is the standard for CRM, absolutely. But for service? Zendesk powers over 100,000 companies globally—we're the standard for customer service. The question is: do you want a CRM company learning service, or a service company that's been perfecting it for 17+ years? Salesforce sells you a platform; we deliver outcomes.</p>
+                        </div>
+                    </div>
+
+                    <div class="objection-box">
+                        <strong>Objection: "We need enterprise scale and security."</strong>
+                        <div class="response">
+                            <p><strong>Response:</strong> We absolutely deliver enterprise scale—companies like Uber, Shopify, and Siemens trust Zendesk. We have SOC2, ISO 27001, GDPR compliance, and enterprise SLAs. The difference? You get enterprise capabilities without enterprise complexity. Salesforce requires a dedicated team just to manage it; Zendesk scales without the overhead.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>Customer Use Cases & Wins</h2>
+
+                    <div class="use-case">
+                        <h4>Mid-Market SaaS Company (500-1000 employees)</h4>
+                        <p><strong>Challenge:</strong> Evaluated both Zendesk and Salesforce Service Cloud</p>
+                        <p><strong>Zendesk Win:</strong> Chose Zendesk for 60% cost savings, 4-week implementation vs. 6-month Salesforce timeline, and AI-powered automation that achieved 35% deflection in 90 days.</p>
+                    </div>
+
+                    <div class="use-case">
+                        <h4>Enterprise Retail (10,000+ employees)</h4>
+                        <p><strong>Challenge:</strong> Using Salesforce CRM but Service Cloud was too complex for contact center agents</p>
+                        <p><strong>Zendesk Win:</strong> Implemented Zendesk for service while keeping Salesforce for sales. Achieved 40% improvement in agent efficiency and 25% faster resolution times within 6 months.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FRESHWORKS TAB -->
+            <div id="freshworks" class="tab-content">
+                <div class="overview-box">
+                    <h2>Freshworks (Freshdesk)</h2>
+                    <p><strong>Company Profile:</strong> SMB-focused competitor with low entry price but limited enterprise capabilities and AI maturity.</p>
+                    <p><strong>Market Position:</strong> Budget alternative for small teams, struggling to scale up-market.</p>
+                </div>
+
+                <div class="section">
+                    <h2>Pricing Comparison</h2>
+                    <div class="price-tag">Freshworks: $15-$79/user/month</div>
+                    <div class="price-tag">Zendesk: $19-$115/user/month (Suite)</div>
+                    <p style="margin-top: 15px;"><strong>Key Insight:</strong> Freshworks appears cheaper at entry level, but lacks critical features. To match Zendesk capabilities, customers need multiple Freshworks products and add-ons, closing the price gap significantly.</p>
+                </div>
+
+                <div class="section">
+                    <h2>Feature & AI Capabilities Comparison</h2>
+                    <div class="comparison-grid">
+                        <div class="comparison-card">
+                            <h4>✓ Zendesk Advantages</h4>
+                            <ul class="feature-list">
+                                <li>Advanced agentic AI and autonomous resolutions</li>
+                                <li>Enterprise-grade scalability proven at scale</li>
+                                <li>Comprehensive omnichannel out of the box</li>
+                                <li>Deep analytics and business intelligence</li>
+                                <li>Mature ecosystem with 1,500+ integrations</li>
+                                <li>Global infrastructure and 24/7 enterprise support</li>
+                                <li>Industry-specific solutions</li>
+                            </ul>
+                        </div>
+                        <div class="comparison-card competitor">
+                            <h4>✗ Freshworks Limitations</h4>
+                            <ul class="feature-list">
+                                <li class="negative">Basic AI capabilities, no true autonomous agents</li>
+                                <li class="negative">Performance issues at enterprise scale</li>
+                                <li class="negative">Limited customization options</li>
+                                <li class="negative">Weaker reporting and analytics</li>
+                                <li class="negative">Smaller integration marketplace</li>
+                                <li class="negative">Support quality concerns at enterprise level</li>
+                                <li class="negative">Limited governance for large organizations</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>Strengths & Weaknesses</h2>
+                    <h3>Freshworks Strengths</h3>
+                    <p><span class="badge strength">Low Entry Price</span> <span class="badge strength">Quick Setup</span> <span class="badge strength">Simple UI</span></p>
+                    <ul class="feature-list">
+                        <li>Attractive pricing for small teams (under 20 agents)</li>
+                        <li>Fast time to first ticket</li>
+                        <li>Easy for basic use cases</li>
+                    </ul>
+
+                    <h3>Freshworks Weaknesses</h3>
+                    <p><span class="badge weakness">Enterprise Gaps</span> <span class="badge weakness">AI Immaturity</span> <span class="badge weakness">Scalability</span></p>
+                    <ul class="feature-list">
+                        <li class="negative">Not built for enterprise complexity</li>
+                        <li class="negative">AI is years behind Zendesk's agentic approach</li>
+                        <li class="negative">Limited to contact center use case</li>
+                        <li class="negative">Customers outgrow it and need to migrate</li>
+                        <li class="negative">Reputation for service/support issues</li>
+                    </ul>
+                </div>
+
+                <div class="win-section">
+                    <h2>Why Zendesk Wins</h2>
+                    <h3>For Service Leaders:</h3>
+                    <ul class="feature-list">
+                        <li><strong>Growth Partner:</strong> Freshworks is for starting out; Zendesk is for scaling up. We grow with you from 10 to 10,000 agents.</li>
+                        <li><strong>AI That Delivers:</strong> While Freshworks offers basic chatbots, our agentic AI delivers real autonomous resolutions and self-improving learning loops.</li>
+                        <li><strong>Proven at Scale:</strong> We support the world's largest contact centers. Freshworks customers hit limits and migrate to us.</li>
+                        <li><strong>Innovation Leadership:</strong> We're defining the future of agentic service, not playing catch-up.</li>
+                    </ul>
+
+                    <h3>For IT Leaders:</h3>
+                    <ul class="feature-list">
+                        <li><strong>Enterprise Architecture:</strong> Built for global scale, security, and compliance from day one.</li>
+                        <li><strong>Avoid Migration Pain:</strong> Start with an enterprise platform, not a tool you'll outgrow in 18-24 months.</li>
+                        <li><strong>Unified Service Platform:</strong> One platform for all service needs vs. buying multiple Freshworks products.</li>
+                        <li><strong>Proven ROI:</strong> Customers see 3-year ROI of 286% (Forrester TEI Study).</li>
+                    </ul>
+                </div>
+
+                <div class="section">
+                    <h2>Common Objections & Responses</h2>
+
+                    <div class="objection-box">
+                        <strong>Objection: "Freshworks is cheaper for our small team."</strong>
+                        <div class="response">
+                            <p><strong>Response:</strong> That's true for entry-level plans, but let's think beyond month one. What happens when you need advanced automation, better analytics, or scale beyond 50 agents? With Freshworks, you'll hit limitations and face a painful migration. With Zendesk Suite, you get enterprise features from day one at competitive pricing—and you never have to rip and replace. Plus, our AI-powered automation delivers ROI that makes the price difference insignificant.</p>
+                        </div>
+                    </div>
+
+                    <div class="objection-box">
+                        <strong>Objection: "Freshworks is simpler and easier to use."</strong>
+                        <div class="response">
+                            <p><strong>Response:</strong> Simpler often means limited. What feels easy at 10 agents becomes constraining at 50. Zendesk is intuitive by design—we've invested 17 years in user experience. The difference is we give you simplicity AND power. You don't have to choose between easy-to-use and enterprise-capable.</p>
+                        </div>
+                    </div>
+
+                    <div class="objection-box">
+                        <strong>Objection: "We're not enterprise scale yet."</strong>
+                        <div class="response">
+                            <p><strong>Response:</strong> That's exactly when to choose Zendesk. Companies who start with Freshworks end up migrating to us in 18-24 months—that's a costly distraction. Zendesk scales from 5 to 5,000 agents on the same platform. Start with the right foundation and avoid migration costs, data loss, and disruption down the road.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>Customer Use Cases & Wins</h2>
+
+                    <div class="use-case">
+                        <h4>Fast-Growing Tech Startup (50-200 agents)</h4>
+                        <p><strong>Challenge:</strong> Outgrew Freshworks after 18 months, hitting scalability limits</p>
+                        <p><strong>Zendesk Win:</strong> Migrated to Zendesk for enterprise capabilities. Achieved 50% improvement in resolution time with AI automation and avoided future migration pain.</p>
+                    </div>
+
+                    <div class="use-case">
+                        <h4>E-commerce Company (100-500 agents)</h4>
+                        <p><strong>Challenge:</strong> Evaluating both for seasonal scaling needs</p>
+                        <p><strong>Zendesk Win:</strong> Chose Zendesk for proven scalability during peak seasons. Handled 10x volume spikes seamlessly with AI-powered deflection, something Freshworks couldn't guarantee.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- INTERCOM TAB -->
+            <div id="intercom" class="tab-content">
+                <div class="overview-box">
+                    <h2>Intercom</h2>
+                    <p><strong>Company Profile:</strong> Marketing-first platform pivoting to support. Strong in proactive messaging but weak in ticket management and enterprise support operations.</p>
+                    <p><strong>Market Position:</strong> Product/growth teams favorite, not built for contact center operations.</p>
+                </div>
+
+                <div class="section">
+                    <h2>Pricing Comparison</h2>
+                    <div class="price-tag">Intercom: $39-$139/seat/month</div>
+                    <div class="price-tag">Zendesk: $19-$115/user/month (Suite)</div>
+                    <p style="margin-top: 15px;"><strong>Key Insight:</strong> Intercom's pricing gets expensive fast with seat-based models and usage fees. Their support features are limited compared to Zendesk, making TCO higher for comparable capabilities.</p>
+                </div>
+
+                <div class="section">
+                    <h2>Feature & AI Capabilities Comparison</h2>
+                    <div class="comparison-grid">
+                        <div class="comparison-card">
+                            <h4>✓ Zendesk Advantages</h4>
+                            <ul class="feature-list">
+                                <li>Purpose-built for support operations</li>
+                                <li>Advanced ticket management and workflows</li>
+                                <li>Omnichannel support (voice, SMS, social, email)</li>
+                                <li>Enterprise workforce management</li>
+                                <li>Agentic AI for autonomous resolution</li>
+                                <li>Comprehensive reporting and analytics</li>
+                                <li>Proven for high-volume contact centers</li>
+                            </ul>
+                        </div>
+                        <div class="comparison-card competitor">
+                            <h4>✗ Intercom Limitations</h4>
+                            <ul class="feature-list">
+                                <li class="negative">Marketing tool trying to do support</li>
+                                <li class="negative">Weak ticket management capabilities</li>
+                                <li class="negative">No native voice support</li>
+                                <li class="negative">Limited workforce management</li>
+                                <li class="negative">Basic AI, no autonomous agents</li>
+                                <li class="negative">Limited reporting for support metrics</li>
+                                <li class="negative">Not viable for enterprise contact centers</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>Strengths & Weaknesses</h2>
+                    <h3>Intercom Strengths</h3>
+                    <p><span class="badge strength">Messenger UI</span> <span class="badge strength">Proactive Messaging</span> <span class="badge strength">Product Tours</span></p>
+                    <ul class="feature-list">
+                        <li>Modern chat interface that product teams love</li>
+                        <li>Good for proactive customer engagement</li>
+                        <li>Strong in-app messaging for SaaS products</li>
+                    </ul>
+
+                    <h3>Intercom Weaknesses</h3>
+                    <p><span class="badge weakness">Support Gaps</span> <span class="badge weakness">Pricing</span> <span class="badge weakness">Contact Center</span></p>
+                    <ul class="feature-list">
+                        <li class="negative">Not designed for traditional support operations</li>
+                        <li class="negative">Expensive at scale with usage-based pricing</li>
+                        <li class="negative">Poor fit for voice/phone support</li>
+                        <li class="negative">Limited SLA management and tracking</li>
+                        <li class="negative">Weak for complex ticket routing and workflows</li>
+                    </ul>
+                </div>
+
+                <div class="win-section">
+                    <h2>Why Zendesk Wins</h2>
+                    <h3>For Service Leaders:</h3>
+                    <ul class="feature-list">
+                        <li><strong>Built for Support:</strong> Intercom is a marketing tool with support features. We're a support platform with marketing capabilities.</li>
+                        <li><strong>Omnichannel Excellence:</strong> We support every channel natively—voice, email, chat, social, SMS. Intercom is primarily chat-focused.</li>
+                        <li><strong>Enterprise Operations:</strong> Handle complex workflows, SLAs, routing, and workforce management that Intercom can't support.</li>
+                        <li><strong>AI-Powered Resolution:</strong> Our agentic AI delivers real resolutions, not just conversation routing.</li>
+                    </ul>
+
+                    <h3>For IT Leaders:</h3>
+                    <ul class="feature-list">
+                        <li><strong>Unified Platform:</strong> Don't piece together Intercom + another tool for voice. Get everything in one platform.</li>
+                        <li><strong>Predictable Costs:</strong> No surprise usage fees or per-conversation charges.</li>
+                        <li><strong>Enterprise Security:</strong> Built for regulated industries with comprehensive compliance certifications.</li>
+                        <li><strong>Integration Ecosystem:</strong> 1,500+ integrations vs. Intercom's limited marketplace.</li>
+                    </ul>
+                </div>
+
+                <div class="section">
+                    <h2>Common Objections & Responses</h2>
+
+                    <div class="objection-box">
+                        <strong>Objection: "Our product team loves Intercom's messenger."</strong>
+                        <div class="response">
+                            <p><strong>Response:</strong> That's great for product-led growth, but let's think about your support team's needs. Intercom's messenger is beautiful, but it's not built for the complexity of support operations—ticket management, SLAs, omnichannel, workforce management. The good news? Zendesk offers a modern messaging experience AND enterprise support capabilities. Your product team gets a great UI; your support team gets a real support platform.</p>
+                        </div>
+                    </div>
+
+                    <div class="objection-box">
+                        <strong>Objection: "We use Intercom for proactive messaging."</strong>
+                        <div class="response">
+                            <p><strong>Response:</strong> Intercom is strong there, absolutely. But here's the question: when customers need help, can your support team deliver? If you're running a contact center, handling calls, managing complex tickets, or supporting multiple channels, Intercom falls short. Zendesk gives you proactive capabilities PLUS a complete support platform. You don't have to choose.</p>
+                        </div>
+                    </div>
+
+                    <div class="objection-box">
+                        <strong>Objection: "Intercom integrates well with our product."</strong>
+                        <div class="response">
+                            <p><strong>Response:</strong> Integration is important, but it's not the same as having purpose-built support capabilities. Zendesk integrates with thousands of products and offers API-first architecture. The difference is we also give you the support operations infrastructure you'll need as you scale. Start with the right foundation.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>Customer Use Cases & Wins</h2>
+
+                    <div class="use-case">
+                        <h4>SaaS Company (500+ employees)</h4>
+                        <p><strong>Challenge:</strong> Using Intercom but struggling with ticket management and voice support</p>
+                        <p><strong>Zendesk Win:</strong> Switched to Zendesk for comprehensive omnichannel support. Reduced resolution time by 40% with better routing and automation, added voice support seamlessly.</p>
+                    </div>
+
+                    <div class="use-case">
+                        <h4>FinTech Startup Scaling Up</h4>
+                        <p><strong>Challenge:</strong> Outgrowing Intercom, needed compliance and enterprise features</p>
+                        <p><strong>Zendesk Win:</strong> Migrated for enterprise security, compliance certifications, and advanced AI. Achieved SOC2 compliance requirements that Intercom couldn't fully support.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DECAGON TAB -->
+            <div id="decagon" class="tab-content">
+                <div class="overview-box">
+                    <h2>Decagon</h2>
+                    <p><strong>Company Profile:</strong> AI-native startup focused on customer support automation. Point solution for AI agents, not a complete platform.</p>
+                    <p><strong>Market Position:</strong> Emerging player in AI automation; lacks comprehensive platform capabilities.</p>
+                </div>
+
+                <div class="section">
+                    <h2>Pricing Comparison</h2>
+                    <div class="price-tag">Decagon: Custom pricing (typically $30-50k+ annual minimum)</div>
+                    <div class="price-tag">Zendesk: $19-$115/user/month (Suite)</div>
+                    <p style="margin-top: 15px;"><strong>Key Insight:</strong> Decagon requires high upfront commitment and doesn't include ticketing, phone, workforce management, or other essential capabilities. You'll need Zendesk or another platform anyway.</p>
+                </div>
+
+                <div class="section">
+                    <h2>Feature & AI Capabilities Comparison</h2>
+                    <div class="comparison-grid">
+                        <div class="comparison-card">
+                            <h4>✓ Zendesk Advantages</h4>
+                            <ul class="feature-list">
+                                <li>Complete platform: AI + ticketing + omnichannel + analytics</li>
+                                <li>Agentic AI integrated into full customer journey</li>
+                                <li>Self-improving system with resolution learning loop</li>
+                                <li>Works across all channels (chat, email, voice, social)</li>
+                                <li>Enterprise governance and security built-in</li>
+                                <li>Proven at scale with 100,000+ customers</li>
+                                <li>Human + AI hybrid approach</li>
+                            </ul>
+                        </div>
+                        <div class="comparison-card competitor">
+                            <h4>✗ Decagon Limitations</h4>
+                            <ul class="feature-list">
+                                <li class="negative">Point solution only, not a platform</li>
+                                <li class="negative">No native ticketing system</li>
+                                <li class="negative">Limited channel support</li>
+                                <li class="negative">No workforce management or routing</li>
+                                <li class="negative">Requires integration with other platforms</li>
+                                <li class="negative">Limited track record and customer base</li>
+                                <li class="negative">AI-only approach, no human escalation workflow</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>Strengths & Weaknesses</h2>
+                    <h3>Decagon Strengths</h3>
+                    <p><span class="badge strength">AI-Native</span> <span class="badge strength">Modern Tech</span></p>
+                    <ul class="feature-list">
+                        <li>Purpose-built AI agents for automation</li>
+                        <li>Modern architecture and approach</li>
+                        <li>Good for specific AI use cases</li>
+                    </ul>
+
+                    <h3>Decagon Weaknesses</h3>
+                    <p><span class="badge weakness">Incomplete Platform</span> <span class="badge weakness">Integration Complexity</span> <span class="badge weakness">Limited Maturity</span></p>
+                    <ul class="feature-list">
+                        <li class="negative">Not a full support platform—point solution only</li>
+                        <li class="negative">Must be layered on top of existing systems</li>
+                        <li class="negative">No proven enterprise deployments at scale</li>
+                        <li class="negative">Limited governance and security features</li>
+                        <li class="negative">Startup risk and sustainability concerns</li>
+                        <li class="negative">No omnichannel or contact center capabilities</li>
+                    </ul>
+                </div>
+
+                <div class="win-section">
+                    <h2>Why Zendesk Wins</h2>
+                    <h3>For Service Leaders:</h3>
+                    <ul class="feature-list">
+                        <li><strong>Complete Platform:</strong> Why buy AI automation separately when Zendesk includes advanced agentic AI plus the full platform?</li>
+                        <li><strong>Proven at Scale:</strong> Our AI powers millions of resolutions daily across 100,000+ companies. Decagon is unproven at enterprise scale.</li>
+                        <li><strong>Seamless Experience:</strong> AI integrated into your full workflow—no middleware, no integration projects.</li>
+                        <li><strong>Human + AI:</strong> Smart escalation from AI to human agents. Decagon focuses only on automation.</li>
+                    </ul>
+
+                    <h3>For IT Leaders:</h3>
+                    <ul class="feature-list">
+                        <li><strong>One Platform, One Vendor:</strong> Eliminate tool sprawl. Don't add another point solution to your stack.</li>
+                        <li><strong>Enterprise Governance:</strong> Built-in security, compliance, and visibility vs. bolting on a third-party AI layer.</li>
+                        <li><strong>De-Risk Your Investment:</strong> Established vendor with enterprise SLAs and support vs. startup uncertainty.</li>
+                        <li><strong>Total Solution:</strong> You need ticketing, routing, analytics, AND AI. Zendesk delivers all of it.</li>
+                    </ul>
+                </div>
+
+                <div class="section">
+                    <h2>Common Objections & Responses</h2>
+
+                    <div class="objection-box">
+                        <strong>Objection: "Decagon's AI seems more advanced."</strong>
+                        <div class="response">
+                            <p><strong>Response:</strong> It's easy to look advanced when you only focus on one thing. Zendesk delivers agentic AI plus the entire platform you need to run support. Our AI is self-improving, integrated across every channel, and proven at scale. Decagon is a layer you'd put on TOP of Zendesk—why not get both from us? Plus, our AI roadmap is aggressive; we're not standing still.</p>
+                        </div>
+                    </div>
+
+                    <div class="objection-box">
+                        <strong>Objection: "We want best-of-breed AI."</strong>
+                        <div class="response">
+                            <p><strong>Response:</strong> That's a valid approach in theory, but here's the reality: best-of-breed means integration complexity, data silos, and operational overhead. Zendesk's integrated AI is purpose-built for service, trained on 17+ years of support data, and seamlessly connected to your entire workflow. You get best-in-class AI without the integration tax. Plus, you still need a ticketing platform—that's Zendesk too.</p>
+                        </div>
+                    </div>
+
+                    <div class="objection-box">
+                        <strong>Objection: "Can't we use both?"</strong>
+                        <div class="response">
+                            <p><strong>Response:</strong> You could, but why? You'd pay for Zendesk's platform AND Decagon's AI, manage two vendors, handle complex integrations, and introduce potential security gaps. Zendesk's agentic AI delivers autonomous resolutions today. Let's start there, and if you find gaps, we can discuss. But most customers find our AI exceeds their needs—especially when it's native to the platform.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>Competitive Strategy</h2>
+                    <p><strong>Key Positioning:</strong> Decagon is an add-on; Zendesk is the platform. Position Zendesk as the complete solution that eliminates the need for point solutions like Decagon.</p>
+
+                    <div class="use-case">
+                        <h4>Why Customers Choose Integrated AI</h4>
+                        <p>Companies evaluating point solutions like Decagon ultimately choose Zendesk because they realize they need a complete platform anyway. Adding Decagon on top creates:</p>
+                        <ul class="feature-list">
+                            <li>Integration complexity and maintenance burden</li>
+                            <li>Higher total costs (two vendors instead of one)</li>
+                            <li>Data governance challenges</li>
+                            <li>Operational friction between systems</li>
+                        </ul>
+                        <p><strong>Result:</strong> Zendesk's unified platform with native agentic AI eliminates these issues while delivering equal or better AI capabilities.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SIERRA AI TAB -->
+            <div id="sierra" class="tab-content">
+                <div class="overview-box">
+                    <h2>Sierra AI</h2>
+                    <p><strong>Company Profile:</strong> AI conversational platform founded by Bret Taylor (ex-Salesforce). Early-stage company focused on AI agents for customer experience.</p>
+                    <p><strong>Market Position:</strong> Emerging AI player with strong pedigree but unproven at scale; not a full support platform.</p>
+                </div>
+
+                <div class="section">
+                    <h2>Pricing Comparison</h2>
+                    <div class="price-tag">Sierra AI: Custom/Enterprise pricing (details not public)</div>
+                    <div class="price-tag">Zendesk: $19-$115/user/month (Suite)</div>
+                    <p style="margin-top: 15px;"><strong>Key Insight:</strong> Sierra is positioning as premium AI solution with enterprise-level pricing but without proven platform capabilities. You'll still need a full support platform like Zendesk.</p>
+                </div>
+
+                <div class="section">
+                    <h2>Feature & AI Capabilities Comparison</h2>
+                    <div class="comparison-grid">
+                        <div class="comparison-card">
+                            <h4>✓ Zendesk Advantages</h4>
+                            <ul class="feature-list">
+                                <li>Complete support platform, not just AI</li>
+                                <li>Proven agentic AI at scale (millions of interactions)</li>
+                                <li>17+ years of service data and expertise</li>
+                                <li>Full omnichannel capabilities</li>
+                                <li>Workforce management and analytics</li>
+                                <li>100,000+ customer deployments</li>
+                                <li>Enterprise-grade security and compliance</li>
+                                <li>Established vendor with long-term viability</li>
+                            </ul>
+                        </div>
+                        <div class="comparison-card competitor">
+                            <h4>✗ Sierra AI Limitations</h4>
+                            <ul class="feature-list">
+                                <li class="negative">AI conversational layer only, not a platform</li>
+                                <li class="negative">Very early stage, limited production deployments</li>
+                                <li class="negative">No ticketing, routing, or contact center features</li>
+                                <li class="negative">Unproven at enterprise scale</li>
+                                <li class="negative">Limited channel support</li>
+                                <li class="negative">Must integrate with existing platforms</li>
+                                <li class="negative">High execution risk for early-stage company</li>
+                                <li class="negative">Limited governance and security track record</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>Strengths & Weaknesses</h2>
+                    <h3>Sierra AI Strengths</h3>
+                    <p><span class="badge strength">Founder Pedigree</span> <span class="badge strength">AI-First Vision</span> <span class="badge strength">Modern Approach</span></p>
+                    <ul class="feature-list">
+                        <li>Strong founding team with Salesforce/tech experience</li>
+                        <li>AI-native architecture and approach</li>
+                        <li>Focused on conversational AI innovation</li>
+                        <li>Well-funded startup with strong backers</li>
+                    </ul>
+
+                    <h3>Sierra AI Weaknesses</h3>
+                    <p><span class="badge weakness">Early Stage</span> <span class="badge weakness">Incomplete</span> <span class="badge weakness">Unproven</span></p>
+                    <ul class="feature-list">
+                        <li class="negative">Very new company (founded 2023), limited track record</li>
+                        <li class="negative">Not a complete support platform</li>
+                        <li class="negative">No proven enterprise deployments</li>
+                        <li class="negative">Requires layering on existing systems</li>
+                        <li class="negative">Startup viability risk</li>
+                        <li class="negative">Limited documentation and support ecosystem</li>
+                    </ul>
+                </div>
+
+                <div class="win-section">
+                    <h2>Why Zendesk Wins</h2>
+                    <h3>For Service Leaders:</h3>
+                    <ul class="feature-list">
+                        <li><strong>Proven at Scale:</strong> Sierra is unproven; Zendesk powers millions of customer interactions daily across diverse industries.</li>
+                        <li><strong>Complete Solution:</strong> You need more than conversational AI—you need ticketing, analytics, workforce management, and omnichannel. That's Zendesk.</li>
+                        <li><strong>Immediate Value:</strong> Deploy proven technology today vs. betting on an early-stage startup.</li>
+                        <li><strong>Deep Service Expertise:</strong> 17 years of learning what drives resolution. Sierra is figuring it out.</li>
+                    </ul>
+
+                    <h3>For IT Leaders:</h3>
+                    <ul class="feature-list">
+                        <li><strong>De-Risk Your Investment:</strong> Established vendor with enterprise SLAs, support, and financial stability vs. early-stage startup risk.</li>
+                        <li><strong>One Platform:</strong> Eliminate the need for point solutions. Zendesk delivers AI plus the full platform.</li>
+                        <li><strong>Enterprise Governance:</strong> Proven security, compliance (SOC2, ISO, GDPR), and data governance vs. unproven startup.</li>
+                        <li><strong>Ecosystem Maturity:</strong> 1,500+ integrations, extensive documentation, and global support infrastructure.</li>
+                    </ul>
+                </div>
+
+                <div class="section">
+                    <h2>Common Objections & Responses</h2>
+
+                    <div class="objection-box">
+                        <strong>Objection: "Sierra has impressive AI credentials and backing."</strong>
+                        <div class="response">
+                            <p><strong>Response:</strong> Absolutely, Bret Taylor is impressive, and the team has strong credentials. But credentials don't run your support operation. Zendesk has 17 years of service expertise, millions of production interactions, and proven results at enterprise scale. Sierra is building something new; we've already built and proven it. The question is: do you want to be a beta customer for an early-stage startup, or deploy proven technology today?</p>
+                        </div>
+                    </div>
+
+                    <div class="objection-box">
+                        <strong>Objection: "We want cutting-edge AI innovation."</strong>
+                        <div class="response">
+                            <p><strong>Response:</strong> We do too—that's why we're investing billions in AI and leading the shift to agentic service. The difference? Our innovation is built on a proven platform with 100,000+ customers. Sierra is trying to prove the platform exists. With Zendesk, you get cutting-edge AI plus the infrastructure to actually run your support operation. You're not choosing between innovation and reliability; you're getting both.</p>
+                        </div>
+                    </div>
+
+                    <div class="objection-box">
+                        <strong>Objection: "Shouldn't we wait and see how Sierra develops?"</strong>
+                        <div class="response">
+                            <p><strong>Response:</strong> You could, but what's the cost of waiting? Your competitors are deploying agentic AI today with Zendesk and gaining efficiency advantages. Sierra might be interesting in 2-3 years, but Zendesk delivers proven autonomous resolutions now. Let's get you value today while monitoring the market. If Sierra proves compelling later, integrations are always possible—but you'll already be ahead.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>Competitive Strategy</h2>
+                    <p><strong>Key Positioning:</strong> Sierra is a bet on the future; Zendesk is proven today. Don't experiment with your support operation.</p>
+
+                    <div class="use-case">
+                        <h4>Risk Assessment: Early-Stage AI Vendors</h4>
+                        <p><strong>Risks of choosing Sierra AI:</strong></p>
+                        <ul class="feature-list">
+                            <li class="negative">Company viability and funding risk</li>
+                            <li class="negative">Limited production track record</li>
+                            <li class="negative">Incomplete platform requires multiple vendors</li>
+                            <li class="negative">Integration and maintenance complexity</li>
+                            <li class="negative">Unproven scalability and reliability</li>
+                            <li class="negative">Limited support and documentation</li>
+                        </ul>
+                        <p><strong>Zendesk Alternative:</strong> Proven platform + cutting-edge AI + enterprise support + zero execution risk.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SERVICENOW TAB -->
+            <div id="servicenow" class="tab-content">
+                <div class="overview-box">
+                    <h2>ServiceNow</h2>
+                    <p><strong>Company Profile:</strong> IT Service Management (ITSM) giant expanding into customer service. Complex, expensive, and built for internal IT, not customer-facing support.</p>
+                    <p><strong>Market Position:</strong> ITSM leader trying to compete in customer service; strong in employee service, weak in customer service.</p>
+                </div>
+
+                <div class="section">
+                    <h2>Pricing Comparison</h2>
+                    <div class="price-tag">ServiceNow: $100-$200+/user/month</div>
+                    <div class="price-tag">Zendesk: $19-$115/user/month (Suite)</div>
+                    <p style="margin-top: 15px;"><strong>Key Insight:</strong> ServiceNow is significantly more expensive with complex licensing. Built for IT workflows, not customer service efficiency. TCO can be 3-5x higher than Zendesk.</p>
+                </div>
+
+                <div class="section">
+                    <h2>Feature & AI Capabilities Comparison</h2>
+                    <div class="comparison-grid">
+                        <div class="comparison-card">
+                            <h4>✓ Zendesk Advantages</h4>
+                            <ul class="feature-list">
+                                <li>Purpose-built for customer service</li>
+                                <li>Intuitive UI designed for support agents</li>
+                                <li>Fast implementation (weeks, not months)</li>
+                                <li>Omnichannel customer engagement</li>
+                                <li>Agentic AI for customer-facing interactions</li>
+                                <li>Lower TCO and pricing transparency</li>
+                                <li>Strong for B2C and high-volume support</li>
+                            </ul>
+                        </div>
+                        <div class="comparison-card competitor">
+                            <h4>✗ ServiceNow Limitations</h4>
+                            <ul class="feature-list">
+                                <li class="negative">ITSM tool adapted for customer service</li>
+                                <li class="negative">Complex, IT-centric interface</li>
+                                <li class="negative">6-12 month implementations typical</li>
+                                <li class="negative">Limited customer-facing channels</li>
+                                <li class="negative">AI built for IT workflows, not customer service</li>
+                                <li class="negative">Very expensive with hidden costs</li>
+                                <li class="negative">Poor fit for B2C and contact centers</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>Strengths & Weaknesses</h2>
+                    <h3>ServiceNow Strengths</h3>
+                    <p><span class="badge strength">ITSM Leader</span> <span class="badge strength">Employee Service</span> <span class="badge strength">Enterprise IT</span></p>
+                    <ul class="feature-list">
+                        <li>Dominant in IT Service Management</li>
+                        <li>Strong for internal employee service</li>
+                        <li>Workflow automation for IT processes</li>
+                        <li>Established in large enterprises</li>
+                    </ul>
+
+                    <h3>ServiceNow Weaknesses</h3>
+                    <p><span class="badge weakness">Customer Service Gaps</span> <span class="badge weakness">Complexity</span> <span class="badge weakness">Cost</span></p>
+                    <ul class="feature-list">
+                        <li class="negative">Not designed for customer-facing support</li>
+                        <li class="negative">Overwhelming complexity for support teams</li>
+                        <li class="negative">Prohibitively expensive for customer service use cases</li>
+                        <li class="negative">Poor user experience for contact center agents</li>
+                        <li class="negative">Long implementation timelines</li>
+                        <li class="negative">Weak omnichannel customer engagement</li>
+                    </ul>
+                </div>
+
+                <div class="win-section">
+                    <h2>Why Zendesk Wins</h2>
+                    <h3>For Service Leaders:</h3>
+                    <ul class="feature-list">
+                        <li><strong>Built for Customer Service:</strong> ServiceNow is for IT; Zendesk is for customers. Your agents will thank you.</li>
+                        <li><strong>Fast Time to Value:</strong> Deploy in weeks vs. 6-12 months with ServiceNow. Start resolving customers faster.</li>
+                        <li><strong>Agent Productivity:</strong> Intuitive interface means higher adoption and efficiency. ServiceNow requires extensive training.</li>
+                        <li><strong>Omnichannel Excellence:</strong> Native support for all customer channels. ServiceNow is primarily ticket-based.</li>
+                    </ul>
+
+                    <h3>For IT Leaders:</h3>
+                    <ul class="feature-list">
+                        <li><strong>Unified Service Platform:</strong> Zendesk handles both customer AND employee service. Use ServiceNow for ITSM, Zendesk for service.</li>
+                        <li><strong>TCO Advantage:</strong> 50-70% lower than ServiceNow with transparent pricing and no hidden costs.</li>
+                        <li><strong>Best of Both Worlds:</strong> Keep ServiceNow for IT workflows, use Zendesk for customer service. Both integrate seamlessly.</li>
+                        <li><strong>Reduce Complexity:</strong> Don't force IT tools onto customer service teams. Right tool for the right job.</li>
+                    </ul>
+                </div>
+
+                <div class="section">
+                    <h2>Common Objections & Responses</h2>
+
+                    <div class="objection-box">
+                        <strong>Objection: "We already use ServiceNow for IT, so CSM makes sense."</strong>
+                        <div class="response">
+                            <p><strong>Response:</strong> That's logical in theory, but here's what we hear from companies who tried: ServiceNow CSM is built for IT workflows, not customer service operations. Your contact center agents will struggle with IT-centric interfaces and processes. The better approach? Keep ServiceNow for ITSM where it excels, use Zendesk for customer service where WE excel. Both integrate seamlessly, and your teams get tools built for their actual workflows.</p>
+                        </div>
+                    </div>
+
+                    <div class="objection-box">
+                        <strong>Objection: "ServiceNow can unify employee and customer service."</strong>
+                        <div class="response">
+                            <p><strong>Response:</strong> So can Zendesk—and we do it better for customer service. ServiceNow is great for employee IT service, but customer service has different requirements: omnichannel engagement, high-volume contact centers, customer-facing AI, and agent efficiency. Zendesk is purpose-built for this. Many customers use ServiceNow for employees and Zendesk for customers—best of both worlds.</p>
+                        </div>
+                    </div>
+
+                    <div class="objection-box">
+                        <strong>Objection: "We need enterprise scale and governance."</strong>
+                        <div class="response">
+                            <p><strong>Response:</strong> Zendesk absolutely delivers enterprise scale—we power support for Uber, Shopify, and thousands of large enterprises. We have all the security, compliance, and governance features you need. The difference? You get enterprise capabilities without ServiceNow's complexity and cost. Our customers deploy faster, spend less, and get better agent adoption.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section">
+                    <h2>Customer Use Cases & Wins</h2>
+
+                    <div class="use-case">
+                        <h4>Enterprise Technology Company (5,000+ employees)</h4>
+                        <p><strong>Challenge:</strong> Using ServiceNow for ITSM but needed customer service solution</p>
+                        <p><strong>Zendesk Win:</strong> Deployed Zendesk for customer service while keeping ServiceNow for IT. Achieved 50% faster agent onboarding and 30% improvement in CSAT due to intuitive interface. Both platforms integrated seamlessly.</p>
+                    </div>
+
+                    <div class="use-case">
+                        <h4>Financial Services Company (10,000+ employees)</h4>
+                        <p><strong>Challenge:</strong> Evaluated ServiceNow CSM but concerned about complexity and cost</p>
+                        <p><strong>Zendesk Win:</strong> Chose Zendesk for 60% cost savings and 8-week implementation vs. 9-month ServiceNow timeline. Achieved compliance requirements (SOC2, PCI) with purpose-built customer service platform.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function openTab(evt, competitorName) {
+            // Hide all tab contents
+            var tabContents = document.getElementsByClassName("tab-content");
+            for (var i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove("active");
+            }
+
+            // Remove active class from all tabs
+            var tabs = document.getElementsByClassName("tab");
+            for (var i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove("active");
+            }
+
+            // Show selected tab and mark as active
+            document.getElementById(competitorName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+
+            // Scroll to top of tab content
+            document.getElementById(competitorName).scrollTop = 0;
+        }
+    </script>
+</body>
+</html>
