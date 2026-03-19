@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zendesk Messaging Framework</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #03363D;
+            background: #F8F9FA;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            background: linear-gradient(135deg, #03363D 0%, #045C6B 100%);
+            color: white;
+            padding: 60px 20px;
+            margin-bottom: 40px;
+            border-radius: 12px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            color: #03363D;
+            font-weight: 600;
+        }
+
+        h3 {
+            font-size: 1.4em;
+            margin-bottom: 12px;
+            color: #03363D;
+            font-weight: 600;
+        }
+
+        h4 {
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            color: #045C6B;
+            font-weight: 600;
+        }
+
+        .tagline {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+            font-weight: 500;
+            opacity: 0.95;
+        }
+
+        .company-message {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .company-message h2 {
+            color: #03363D;
+            border-bottom: 3px solid #30A46C;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .company-message p {
+            margin-bottom: 20px;
+            font-size: 1.05em;
+            line-height: 1.8;
+        }
+
+        .macro-theme {
+            background: #E6F7F0;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            border-left: 5px solid #30A46C;
+        }
+
+        .macro-theme h3 {
+            color: #03363D;
+            margin-bottom: 15px;
+        }
+
+        .macro-theme p {
+            font-size: 1.05em;
+            line-height: 1.8;
+        }
+
+        .keywords {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+
+        .keywords h3 {
+            margin-bottom: 20px;
+            color: #03363D;
+        }
+
+        .keyword-list {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .keyword {
+            background: #03363D;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: 600;
+            font-size: 1.05em;
+        }
+
+        .audiences {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .audience {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+        }
+
+        .audience-header {
+            background: linear-gradient(135deg, #03363D 0%, #045C6B 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+
+        .audience-header h2 {
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .audience-subtitle {
+            font-size: 0.95em;
+            opacity: 0.9;
+            margin-bottom: 8px;
+        }
+
+        .core-message {
+            background: #E6F7F0;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            border-left: 4px solid #30A46C;
+        }
+
+        .core-message strong {
+            color: #03363D;
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        .content-themes {
+            margin-top: 30px;
+        }
+
+        .theme {
+            background: #F8F9FA;
+            padding: 25px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border-left: 4px solid #30A46C;
+        }
+
+        .theme h4 {
+            color: #03363D;
+            margin-bottom: 12px;
+            font-size: 1.2em;
+        }
+
+        .theme p {
+            margin-bottom: 12px;
+            line-height: 1.7;
+        }
+
+        .sub-themes {
+            margin-top: 15px;
+            padding: 15px;
+            background: white;
+            border-radius: 6px;
+            font-style: italic;
+            color: #045C6B;
+        }
+
+        .quote {
+            background: linear-gradient(135deg, #30A46C 0%, #2D9E63 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 8px;
+            margin-top: 30px;
+            font-size: 1.1em;
+            font-style: italic;
+            box-shadow: 0 4px 12px rgba(48, 164, 108, 0.3);
+        }
+
+        .quote::before {
+            content: '"';
+            font-size: 2em;
+            line-height: 0;
+            vertical-align: -0.3em;
+            margin-right: 5px;
+        }
+
+        .quote::after {
+            content: '"';
+            font-size: 2em;
+            line-height: 0;
+            vertical-align: -0.3em;
+            margin-left: 5px;
+        }
+
+        .care-about {
+            background: #FFF9E6;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            border-left: 3px solid #FFB800;
+        }
+
+        .how-we-speak {
+            background: #E8F4FD;
+            padding: 15px;
+            border-radius: 6px;
+            margin: 15px 0;
+            border-left: 3px solid #0B7EBB;
+        }
+
+        @media (max-width: 1024px) {
+            .audiences {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2em;
+            }
+
+            .container {
+                padding: 20px 15px;
+            }
+
+            header {
+                padding: 40px 20px;
+            }
+
+            .company-message, .audience {
+                padding: 25px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Zendesk Messaging Framework</h1>
+            <p class="tagline">Reinventing Service with AI</p>
+        </header>
+
+        <div class="company-message">
+            <h2>Company Message: About Zendesk</h2>
+            <p><strong>Zendesk is not simply participating in the AI race; Zendesk is building the first $1billion AI business in service</strong> to prove that when AI is built for real resolution, it fundamentally changes how businesses create value. The era of simply managing conversations is over; while our competitors sell isolated bots and concierges, we are defining the agentic future with the <strong>Zendesk Resolution Platform</strong>: a self-improving system of action that moves fast enough to deliver autonomous service, yet is governed securely to earn absolute trust.</p>
+
+            <p>We are moving past outdated SaaS models to lead a structural shift where automation fuels growth, not just savings. <strong>AI is the means, resolution is our identity, loyalty is the outcome</strong>, and delivering enduring, measurable growth for our customers is the result.</p>
+
+            <p><strong>About Zendesk:</strong> Zendesk powers exceptional service for every person on the planet. We lead the agentic future with the Zendesk Resolution Platform, a self-improving system of action that seamlessly orchestrates AI, automation, and human expertise to deliver secure, autonomous resolutions. We are redefining the industry standard: AI is the means, resolution is our identity, and enduring growth is the result.</p>
+        </div>
+
+        <div class="keywords">
+            <h3>Key Messaging Keywords</h3>
+            <div class="keyword-list">
+                <div class="keyword">Agentic Service</div>
+                <div class="keyword">Self-improving AI</div>
+                <div class="keyword">Resolution Platform</div>
+            </div>
+        </div>
+
+        <div class="macro-theme">
+            <h3>Macro Content Theme Across Audiences: Reinventing Service with AI</h3>
+            <p>Every campaign, content piece and audience-specific message should ladder up to a single argument: that Zendesk is not layering AI onto a legacy service tool, it is rebuilding how service works from the ground up, with resolution as the outcome and growth as the result. The frame is always transformation, not feature. We are not telling buyers what Zendesk does. We are telling them what their business becomes when service stops managing conversations and starts resolving them autonomously, at scale and with the governance enterprises require.</p>
+
+            <p>Service leaders need to believe Zendesk is the fastest and safest path to agentic service. IT leaders need to believe Zendesk is the only platform they can trust with autonomous AI at enterprise scale. All four content themes are expressions of the same idea: the companies that win in the next decade will be the ones that made the shift from service debt to service dividend, and Zendesk is the platform to make that possible.</p>
+        </div>
+
+        <div class="audiences">
+            <!-- Service Leaders -->
+            <div class="audience">
+                <div class="audience-header">
+                    <h2>Service Leaders</h2>
+                    <p class="audience-subtitle">Customer Support, Customer Service, Contact Center</p>
+                </div>
+
+                <div class="care-about">
+                    <strong>What They Care About:</strong>
+                    <p>Achieving Service Metrics, AI modernization, Speed to value, Avoiding falling behind on AI, Volume deflection</p>
+                </div>
+
+                <div class="core-message">
+                    <strong>Core Message:</strong>
+                    <p>We are moving faster in agentic AI than anyone else in the field. Partner with us to modernize autonomous resolution - a self-improving system that gets smarter with every resolution, improving the overall customer experience.</p>
+                </div>
+
+                <div class="how-we-speak">
+                    <strong>How We Speak to Them:</strong>
+                    <p>Speak to their need for speed and trust. Talk about Agentic AI and Autonomous Resolutions. Tell them we're moving faster than anyone, they can partner with us to be the hero who modernized AI without the risk.</p>
+                </div>
+
+                <div class="content-themes">
+                    <h3>Content Themes</h3>
+
+                    <div class="theme">
+                        <h4>1. Agentic Service</h4>
+                        <p>Today, we see growing search volume on "agentic service" and "autonomous service". The job is to make the service status quo feel untenable before Zendesk ever enters the conversation. The measure of service is changing, from how many conversations were managed to how many problems were actually resolved, and most platforms aren't built for that standard.</p>
+                        <p>Content in this theme shows the explicit tension, capturing legacy chatbot search volume and redirecting it, while widening the gap between what legacy SaaS delivered and what agentic service can make possible.</p>
+                        <div class="sub-themes">
+                            <strong>Sub-themes:</strong> Roles shifting in service, measurement shifting with AI.
+                        </div>
+                    </div>
+
+                    <div class="theme">
+                        <h4>2. Outcome-Driven Service & Resolution Platform</h4>
+                        <p>Conviction content for buyers already evaluating. Integrated resolution platform campaign pre-Relate to own the "outcome-based" narrative before the new pricing launch, and continuous validation/proof delivery of this platform post Relate.</p>
+                        <p>Practical guidance for CX leaders on how to transform from a service center to a resolution center, and showcase the change from a software with seats to solutions with outcomes.</p>
+                        <div class="sub-themes">
+                            <strong>Sub-themes:</strong> Self-improving resolution learning loop; fast data and customer base with depth in service category.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="quote">
+                    Zendesk is lightyears ahead on AI agents. They are the ones actually delivering autonomous resolutions today.
+                </div>
+            </div>
+
+            <!-- IT Leaders -->
+            <div class="audience">
+                <div class="audience-header">
+                    <h2>IT Leaders</h2>
+                    <p class="audience-subtitle">Technology & Infrastructure Decision Makers</p>
+                </div>
+
+                <div class="care-about">
+                    <strong>What They Care About:</strong>
+                    <p>Trust, safety, and data governance, ROI and tool consolidation, Avoiding rogue AI and siloed platforms, Reducing cost & complexity of multiple platforms across external and internal support, contain AI vendor sprawl</p>
+                </div>
+
+                <div class="core-message">
+                    <strong>Core Message:</strong>
+                    <p>Traditionally, IT is seen as the "department of no." Zendesk is helping to turn IT into the "department of how". Unify employee and customer service on one trusted platform. When delegating autonomous conversations to a machine, you need the governance, guardrails, and visibility to scale agentic service safely across the entire enterprise.</p>
+                </div>
+
+                <div class="how-we-speak">
+                    <strong>How We Speak to Them:</strong>
+                    <p>Speak directly to their innovation vs. risk paradox. Emphasize the unified platform as the antidote to tool sprawl. One platform means complete visibility, safety guardrails, centralized governance and scale operations without adding headcount.</p>
+                </div>
+
+                <div class="content-themes">
+                    <h3>Content Themes</h3>
+
+                    <div class="theme">
+                        <h4>1. Unified Service Platform</h4>
+                        <p><em>(Across contact center, customer & employee service)</em></p>
+                        <p>Zendesk is the only agentic platform that unifies service across departments - and competitors cannot replicate this story. Content in this theme is meant to close the gap before buyers shortlist, turning structural architectural advantage into the content proof that makes fragmented competitors feel like the wrong bet before a sales conversation ever starts.</p>
+                    </div>
+
+                    <div class="theme">
+                        <h4>2. Closing the AI Trust Gap</h4>
+                        <p>When enterprises delegate live customer conversations to agentic AI, trust isn't just a feature. It is the foundation the entire decision can rest on. Right now, Zendesk is largely invisible despite having the credentials to win that conversation.</p>
+                        <p>Salesforce and ADA are actively building a content moat around trust and governance while we sit on a 46% prompt gap. Content in this theme turns credentials we already own into concrete proof that finds enterprise buyers where they are.</p>
+                    </div>
+                </div>
+
+                <div class="quote">
+                    Zendesk is the best and safest bet - unified architecture where we control the data, the guardrails, and the governance, while finally solving our tool sprawl.
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
