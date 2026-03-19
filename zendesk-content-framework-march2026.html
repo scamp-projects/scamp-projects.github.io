@@ -105,36 +105,6 @@
             line-height: 1.8;
         }
 
-        .keywords {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            margin-bottom: 40px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-            text-align: center;
-        }
-
-        .keywords h3 {
-            margin-bottom: 20px;
-            color: #03363D;
-        }
-
-        .keyword-list {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-
-        .keyword {
-            background: #03363D;
-            color: white;
-            padding: 12px 24px;
-            border-radius: 25px;
-            font-weight: 600;
-            font-size: 1.05em;
-        }
-
         .audiences {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -186,11 +156,17 @@
             margin-top: 30px;
         }
 
+        .themes-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
         .theme {
             background: #F8F9FA;
             padding: 25px;
             border-radius: 8px;
-            margin-bottom: 20px;
             border-left: 4px solid #30A46C;
         }
 
@@ -261,6 +237,10 @@
             .audiences {
                 grid-template-columns: 1fr;
             }
+
+            .themes-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media (max-width: 768px) {
@@ -298,15 +278,6 @@
             <p><strong>About Zendesk:</strong> Zendesk powers exceptional service for every person on the planet. We lead the agentic future with the Zendesk Resolution Platform, a self-improving system of action that seamlessly orchestrates AI, automation, and human expertise to deliver secure, autonomous resolutions. We are redefining the industry standard: AI is the means, resolution is our identity, and enduring growth is the result.</p>
         </div>
 
-        <div class="keywords">
-            <h3>Key Messaging Keywords</h3>
-            <div class="keyword-list">
-                <div class="keyword">Agentic Service</div>
-                <div class="keyword">Self-improving AI</div>
-                <div class="keyword">Resolution Platform</div>
-            </div>
-        </div>
-
         <div class="macro-theme">
             <h3>Macro Content Theme Across Audiences: Reinventing Service with AI</h3>
             <p>Every campaign, content piece and audience-specific message should ladder up to a single argument: that Zendesk is not layering AI onto a legacy service tool, it is rebuilding how service works from the ground up, with resolution as the outcome and growth as the result. The frame is always transformation, not feature. We are not telling buyers what Zendesk does. We are telling them what their business becomes when service stops managing conversations and starts resolving them autonomously, at scale and with the governance enterprises require.</p>
@@ -339,22 +310,23 @@
 
                 <div class="content-themes">
                     <h3>Content Themes</h3>
-
-                    <div class="theme">
-                        <h4>1. Agentic Service</h4>
-                        <p>Today, we see growing search volume on "agentic service" and "autonomous service". The job is to make the service status quo feel untenable before Zendesk ever enters the conversation. The measure of service is changing, from how many conversations were managed to how many problems were actually resolved, and most platforms aren't built for that standard.</p>
-                        <p>Content in this theme shows the explicit tension, capturing legacy chatbot search volume and redirecting it, while widening the gap between what legacy SaaS delivered and what agentic service can make possible.</p>
-                        <div class="sub-themes">
-                            <strong>Sub-themes:</strong> Roles shifting in service, measurement shifting with AI.
+                    <div class="themes-grid">
+                        <div class="theme">
+                            <h4>1. Agentic Service</h4>
+                            <p>Today, we see growing search volume on "agentic service" and "autonomous service". The job is to make the service status quo feel untenable before Zendesk ever enters the conversation. The measure of service is changing, from how many conversations were managed to how many problems were actually resolved, and most platforms aren't built for that standard.</p>
+                            <p>Content in this theme shows the explicit tension, capturing legacy chatbot search volume and redirecting it, while widening the gap between what legacy SaaS delivered and what agentic service can make possible.</p>
+                            <div class="sub-themes">
+                                <strong>Sub-themes:</strong> Roles shifting in service, measurement shifting with AI.
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="theme">
-                        <h4>2. Outcome-Driven Service & Resolution Platform</h4>
-                        <p>Conviction content for buyers already evaluating. Integrated resolution platform campaign pre-Relate to own the "outcome-based" narrative before the new pricing launch, and continuous validation/proof delivery of this platform post Relate.</p>
-                        <p>Practical guidance for CX leaders on how to transform from a service center to a resolution center, and showcase the change from a software with seats to solutions with outcomes.</p>
-                        <div class="sub-themes">
-                            <strong>Sub-themes:</strong> Self-improving resolution learning loop; fast data and customer base with depth in service category.
+                        <div class="theme">
+                            <h4>2. Outcome-Driven Service & Resolution Platform</h4>
+                            <p>Conviction content for buyers already evaluating. Integrated resolution platform campaign pre-Relate to own the "outcome-based" narrative before the new pricing launch, and continuous validation/proof delivery of this platform post Relate.</p>
+                            <p>Practical guidance for CX leaders on how to transform from a service center to a resolution center, and showcase the change from a software with seats to solutions with outcomes.</p>
+                            <div class="sub-themes">
+                                <strong>Sub-themes:</strong> Self-improving resolution learning loop; fast data and customer base with depth in service category.
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -388,17 +360,18 @@
 
                 <div class="content-themes">
                     <h3>Content Themes</h3>
+                    <div class="themes-grid">
+                        <div class="theme">
+                            <h4>1. Unified Service Platform</h4>
+                            <p><em>(Across contact center, customer & employee service)</em></p>
+                            <p>Zendesk is the only agentic platform that unifies service across departments - and competitors cannot replicate this story. Content in this theme is meant to close the gap before buyers shortlist, turning structural architectural advantage into the content proof that makes fragmented competitors feel like the wrong bet before a sales conversation ever starts.</p>
+                        </div>
 
-                    <div class="theme">
-                        <h4>1. Unified Service Platform</h4>
-                        <p><em>(Across contact center, customer & employee service)</em></p>
-                        <p>Zendesk is the only agentic platform that unifies service across departments - and competitors cannot replicate this story. Content in this theme is meant to close the gap before buyers shortlist, turning structural architectural advantage into the content proof that makes fragmented competitors feel like the wrong bet before a sales conversation ever starts.</p>
-                    </div>
-
-                    <div class="theme">
-                        <h4>2. Closing the AI Trust Gap</h4>
-                        <p>When enterprises delegate live customer conversations to agentic AI, trust isn't just a feature. It is the foundation the entire decision can rest on. Right now, Zendesk is largely invisible despite having the credentials to win that conversation.</p>
-                        <p>Salesforce and ADA are actively building a content moat around trust and governance while we sit on a 46% prompt gap. Content in this theme turns credentials we already own into concrete proof that finds enterprise buyers where they are.</p>
+                        <div class="theme">
+                            <h4>2. Closing the AI Trust Gap</h4>
+                            <p>When enterprises delegate live customer conversations to agentic AI, trust isn't just a feature. It is the foundation the entire decision can rest on. Right now, Zendesk is largely invisible despite having the credentials to win that conversation.</p>
+                            <p>Salesforce and ADA are actively building a content moat around trust and governance while we sit on a 46% prompt gap. Content in this theme turns credentials we already own into concrete proof that finds enterprise buyers where they are.</p>
+                        </div>
                     </div>
                 </div>
 
